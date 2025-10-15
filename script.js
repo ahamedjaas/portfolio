@@ -41,7 +41,6 @@ closeVideo.addEventListener('click', () => {
   videoElement.src = '';
 });
 
-/* -------------------------------
  const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
