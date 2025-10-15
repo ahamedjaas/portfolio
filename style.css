@@ -528,7 +528,6 @@ footer {
 
 a { color:#10B981; text-decoration:none; }
 @media (max-width: 600px) {
- @media (max-width: 600px) {
   nav {
     flex-direction: column;
     align-items: center;
@@ -542,8 +541,6 @@ a { color:#10B981; text-decoration:none; }
     justify-content: center;
     gap: 12px;
   }
-}
-
 
   .hero {
     flex-direction: column;
@@ -572,5 +569,16 @@ a { color:#10B981; text-decoration:none; }
   .about-section,
   .projects-section {
     padding: 60px 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-section img,
+  .about-img {
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
   }
 }
