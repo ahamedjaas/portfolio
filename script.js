@@ -117,27 +117,31 @@ if (canvas) {
 
   const images = [
     { img: img1, x: 50, y: 50, angle: 0, radius: 40, speed: 0.008 },
-    { img: img2, x: canvas.width - 200, y: 100, angle: 0, radius: 45, speed: 0.006 }
+    { img: img2, x: 0, y: 100, angle: 0, radius: 45, speed: 0.006 }
   ];
 
   function resizeCanvas() {
     canvas.width = canvas.offsetWidth;
 
     if (window.innerWidth <= 600) {
-      // On mobile, remove both images
-      images.forEach(obj => obj.visible = false);
-      canvas.height = 0; // optional: hide canvas completely
+      // On mobile, hide canvas completely
+      canvas.style.display = 'none';
     } else {
+      canvas.style.display = 'block';
       canvas.height = canvas.parentElement.offsetHeight;
-      images.forEach(obj => obj.visible = true);
+
+      // Reset img2 position for larger screens
+      images[1].x = canvas.width - 200;
     }
   }
 
   function drawImages() {
+    if (window.innerWidth <= 600) return; // Skip drawing on mobile
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     images.forEach(obj => {
-      if (obj.visible && obj.img.complete) {
+      if (obj.img.complete) {
         const newY = obj.y + Math.sin(obj.angle) * obj.radius;
         ctx.drawImage(obj.img, obj.x, newY, 200, 200);
         obj.angle += obj.speed;
@@ -155,6 +159,7 @@ if (canvas) {
   // Initial setup
   resizeCanvas();
 }
+
 
 /* -------------------------------
    Ambient RGB Glow
