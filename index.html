@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaasim | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="ambientRGB"></canvas>
+
+  <!-- Navbar -->
+  <header id="home">
+    <nav>
+      <h2 class="logo">Jaasim</h2>
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-left">
+        <h3 class="hello">Hello!</h3>
+        <h1>I’m <span>Jaasim</span></h1>
+        <p class="tagline">
+          I design interfaces, build circuits, write code, and explore the cloud.
+        </p>
+        <p class="subtext">
+          An Electronics and Communication Engineer shaping ideas into smart, connected experiences.
+        </p>
+        <a href="images/resume.pdf" download="Jaasim_Resume.pdf" class="resume-btn">Resume</a>
+      </div>
+      <div class="hero-right">
+        <img src="images/jaasim.jpg" alt="Jaasim" class="hero-img" />
+      </div>
+    </section>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="hidden section about-section">
+    <div class="about-container">
+      <div class="about-left">
+  <canvas id="codingCanvas"></canvas>
+</div>
+
+      <div class="about-right">
+        <h2 class="about-heading">So, who am I?</h2>
+        <p>
+          I’m someone who finds joy in designing experiences that feel simple, intuitive, and just a bit delightful.
+          My journey began with a foundation in <strong>Electronics and Communication Engineering</strong>, but curiosity
+          pulled me toward <strong>UI/UX design</strong> — where creativity meets logic and every pixel has a purpose.
+        </p>
+        <p>
+          I love exploring how people interact with technology, organizing messy ideas into clean wireframes, and
+          turning them into functional, visually balanced designs. Beyond design, I bring ideas to life through
+          <strong>front-end development</strong> — building responsive, user-friendly interfaces with
+          <strong>HTML, CSS, and JavaScript</strong>.
+        </p>
+        <p>
+          With hands-on experience in <strong>AWS Cloud</strong> services and <strong>embedded systems</strong>, I bridge
+          the gap between hardware and software, blending technology and design to craft smart, connected experiences
+          that truly work.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="hidden section projects-section">
+    <h2 class="projects-heading">What I’ve Built</h2>
+    <br>
+    <div class="projects-container">
+      <div class="projects-left">
+        <div class="project-card">
+          <h3>Ambulert – Emergency Vehicle Alert System</h3>
+          <p>A smart alert system that detects approaching ambulances using their unique frequency and notifies drivers via infotainment systems, enhancing road safety.</p>
+          <p><strong>Tools & Tech:</strong> Raspberry Pi, Frequency Detection, Embedded Systems, Audio Processing</p>
+          <p><strong>My Role:</strong> Led the full design and integration of the system, including hardware setup and signal processing logic.</p>
+          <br>
+          <button class="video-btn" data-video="video/project1.mp4">View Demo Video</button>
+        </div>
+      </div>
+      <div class="projects-right">
+        <div class="project-card">
+          <h3>My Portfolio – Personal Showcase Website</h3>
+          <p>A fully designed and developed portfolio website to showcase my projects and skills.</p>
+          <p><strong>Tools & Tech:</strong> HTML, CSS, JavaScript, Responsive Design</p>
+          <p><strong>My Role:</strong> Designed the layout, created interactive UI elements, and developed the website from scratch.</p>
+          <br>
+          <button class="contact-btn" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Contact Me</button>
+        </div>
+      </div>
+      <div class="thunder-line"></div>
+    </div>
+  </section>
+  <br><br>
+  <!-- Contact Section -->
+  <section id="contact" class="hidden section contact-section">
+    <div class="contact-wrapper">
+      <div class="contact-right">
+        <h2 class="contact-heading">Contact</h2>
+        <p class="contact-subheading">Your message lands directly in my Gmail</p>
+        <div class="contact-container">
+          <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="contact-btn">Send Message</button>
+          </form>
+        </div>
+        <br>
+        <p class="gmail-line">
+          Gmail :
+          <a href="mailto:jaasimahamedeceskct@gmail.com" class="gmail-link">
+            jaasimahamedeceskct@gmail.com
+          </a>
+        </p>
+        <!-- Social Icons -->
+        <div class="social-icons-below">
+          <a href="tel:+918883692508" target="_blank">
+            <img src="images/vector.png" alt="Phone" class="social-img" />
+          </a>
+          <a href="https://www.linkedin.com/in/jaasim-ahamed-356660243?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+            <img src="images/linkedin.png" alt="LinkedIn" class="social-img" />
+          </a>
+          <a href="https://www.instagram.com/jaasim_a.j?igsh=MTgwMGQ0ejZnYncybw==" target="_blank">
+            <img src="images/instagram.png" alt="Instagram" class="social-img" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-content">
+      <span class="close-video">&times;</span>
+      <video id="projectVideo" controls></video>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Jaasim. All rights reserved.</p>
+  </footer>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("BqqUI4uP5FxC3aQYq"); // Your Public Key
+    })();
+  </script>
+
+  <!-- Main JS -->
+  <script src="script.js"></script>
+  <script src="coding.js"></script>
+</body>
+</html>
