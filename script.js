@@ -41,6 +41,30 @@ closeVideo.addEventListener('click', () => {
   videoElement.src = '';
 });
 
+import emailjs from 'https://cdn.emailjs.com/dist/email.min.js';
+
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = {
+    name: contactForm.name.value,
+    email: contactForm.email.value,
+    message: contactForm.message.value
+  };
+
+  emailjs.send('service_jktflig', 'template_eaqlup3', formData)
+    .then(response => {
+      console.log('✅ Email sent successfully:', response);
+      alert('✅ Your message has been sent!');
+      contactForm.reset();
+    })
+    .catch(error => {
+      console.error('❌ EmailJS failed:', error);
+      alert('❌ Message not sent. Check console for details.');
+    });
+});
 
 
 
