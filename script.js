@@ -49,10 +49,10 @@ const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const formData = {
-    name: contactForm.name.value,
-    message: contactForm.message.value,
-    email: contactForm.email.value
+ const formData = {
+    name: contactForm.name.value,       // matches {{name}}
+    email: contactForm.email.value,     // matches {{email}}
+    message: contactForm.message.value  // matches {{message}}
   };
 
   emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
