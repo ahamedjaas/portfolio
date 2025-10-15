@@ -105,6 +105,9 @@ navLinks.forEach(link => {
 /* -------------------------------
    Floating PNGs in About Section
 ---------------------------------*/
+/* -------------------------------
+   Floating PNGs in About Section
+---------------------------------*/
 const canvas = document.getElementById('codingCanvas');
 if (canvas) {
   const ctx = canvas.getContext('2d');
@@ -124,12 +127,17 @@ if (canvas) {
 
     if (window.innerWidth <= 600) {
       canvas.height = canvas.offsetHeight * 1.8;
-      images[0].x = 50;
-      images[0].y = 50;
-      images[1].x = 50;
-      images[1].y = 250; // mobile: lower to prevent collision
+
+      // Only show img2 on mobile
+      images[0].visible = false;
+      images[1].visible = true;
+      images[1].x = (canvas.width - 200) / 2; // center horizontally
+      images[1].y = 50;
     } else {
       canvas.height = canvas.parentElement.offsetHeight;
+
+      images[0].visible = true;
+      images[1].visible = true;
       images[0].x = 50;
       images[0].y = 50;
       images[1].x = canvas.width - 200;
@@ -141,9 +149,9 @@ if (canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     images.forEach(obj => {
-      const imgWidth = 200;
-      const imgHeight = 200;
-      if (obj.img.complete) {
+      if (obj.visible && obj.img.complete) {
+        const imgWidth = 200;
+        const imgHeight = 200;
         const newY = obj.y + Math.sin(obj.angle) * obj.radius;
         ctx.drawImage(obj.img, obj.x, newY, imgWidth, imgHeight);
         obj.angle += obj.speed;
@@ -154,10 +162,10 @@ if (canvas) {
   }
 
   img1.onload = img2.onload = () => drawImages();
-
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas(); // initial setup
 }
+
 
 /* -------------------------------
    Ambient RGB Glow
