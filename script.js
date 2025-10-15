@@ -41,9 +41,12 @@ closeVideo.addEventListener('click', () => {
   videoElement.src = '';
 });
 
- const contactForm = document.getElementById('contactForm');
+/* -------------------------------
+   Contact Form Submission
+---------------------------------*/
+const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e)=> {
+contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const formData = {
@@ -52,20 +55,17 @@ contactForm.addEventListener('submit', (e)=> {
     message: contactForm.message.value
   };
 
-  // Make sure emailjs is initialized first
   emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
     .then((response) => {
       console.log('SUCCESS:', response);
       alert('✅ Your message has been sent!');
       contactForm.reset();
     })
-    .catch((error)=> {
+    .catch((error) => {
       console.error('FAILED:', error);
       alert('❌ Something went wrong. Check console for details.');
     });
 });
-
-
 
 /* -------------------------------
    Navigation Active Link on Scroll
@@ -106,14 +106,8 @@ navLinks.forEach(link => {
    Floating PNGs in About Section
 ---------------------------------*/
 const canvas = document.getElementById('codingCanvas');
-if(canvas) {
+if (canvas) {
   const ctx = canvas.getContext('2d');
-
-  function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
-  }
-  resizeCanvas();
 
   const img1 = new Image();
   img1.src = 'images/img1.png';
@@ -121,9 +115,27 @@ if(canvas) {
   img2.src = 'images/img2.png';
 
   const images = [
-    {img: img1, x: 50, y: 50, angle: 0, radius: 40, speed: 0.008},
-    {img: img2, x: canvas.width - 200, y: 100, angle: 0, radius: 45, speed: 0.006}
+    { img: img1, x: 50, y: 50, angle: 0, radius: 40, speed: 0.008 },
+    { img: img2, x: canvas.width - 200, y: 100, angle: 0, radius: 45, speed: 0.006 }
   ];
+
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+
+    if (window.innerWidth <= 600) {
+      canvas.height = canvas.offsetHeight * 1.8;
+      images[0].x = 50;
+      images[0].y = 50;
+      images[1].x = 50;
+      images[1].y = 250; // mobile: lower to prevent collision
+    } else {
+      canvas.height = canvas.parentElement.offsetHeight;
+      images[0].x = 50;
+      images[0].y = 50;
+      images[1].x = canvas.width - 200;
+      images[1].y = 100;
+    }
+  }
 
   function drawImages() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -131,7 +143,7 @@ if(canvas) {
     images.forEach(obj => {
       const imgWidth = 200;
       const imgHeight = 200;
-      if(obj.img.complete){
+      if (obj.img.complete) {
         const newY = obj.y + Math.sin(obj.angle) * obj.radius;
         ctx.drawImage(obj.img, obj.x, newY, imgWidth, imgHeight);
         obj.angle += obj.speed;
@@ -143,10 +155,13 @@ if(canvas) {
 
   img1.onload = img2.onload = () => drawImages();
 
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-  });
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas(); // initial setup
 }
+
+/* -------------------------------
+   Ambient RGB Glow
+---------------------------------*/
 const rgbCanvas = document.getElementById('ambientRGB');
 const rgbCtx = rgbCanvas.getContext('2d');
 
@@ -164,25 +179,22 @@ function drawRGBGlow() {
   const height = rgbCanvas.height;
   rgbCtx.clearRect(0, 0, width, height);
 
-  // Left Edge Glow
   const leftGradient = rgbCtx.createLinearGradient(0, 0, width * 0.3, 0);
-  leftGradient.addColorStop(0, `rgba(${Math.floor(255*Math.abs(Math.sin(time)))},0,255,0.15)`);
+  leftGradient.addColorStop(0, `rgba(${Math.floor(255 * Math.abs(Math.sin(time)))},0,255,0.15)`);
   leftGradient.addColorStop(1, 'rgba(0,0,0,0)');
 
   rgbCtx.fillStyle = leftGradient;
-  rgbCtx.fillRect(0, 0, width*0.3, height);
+  rgbCtx.fillRect(0, 0, width * 0.3, height);
 
-  // Right Edge Glow
-  const rightGradient = rgbCtx.createLinearGradient(width, 0, width*0.7, 0);
-  rightGradient.addColorStop(0, `rgba(255,${Math.floor(255*Math.abs(Math.sin(time+1)))},0,0.15)`);
+  const rightGradient = rgbCtx.createLinearGradient(width, 0, width * 0.7, 0);
+  rightGradient.addColorStop(0, `rgba(255,${Math.floor(255 * Math.abs(Math.sin(time + 1)))},0,0.15)`);
   rightGradient.addColorStop(1, 'rgba(0,0,0,0)');
 
   rgbCtx.fillStyle = rightGradient;
-  rgbCtx.fillRect(width*0.7, 0, width*0.3, height);
+  rgbCtx.fillRect(width * 0.7, 0, width * 0.3, height);
 
-  time += 0.005; // slow movement
+  time += 0.005;
   requestAnimationFrame(drawRGBGlow);
 }
 
 drawRGBGlow();
-
