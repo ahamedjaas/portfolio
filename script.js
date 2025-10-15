@@ -5,7 +5,7 @@ const sections = document.querySelectorAll('.section');
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('show');
+      if (entry.isIntersecting) entry.target.classList.add('show');
       else entry.target.classList.remove('show');
     });
   },
@@ -42,7 +42,7 @@ closeVideo.addEventListener('click', () => {
 });
 
 /* -------------------------------
-   Contact Form Submission
+   Contact Form Submission (EmailJS v4)
 ---------------------------------*/
 const contactForm = document.getElementById('contactForm');
 
@@ -55,15 +55,16 @@ contactForm.addEventListener('submit', (e) => {
     message: contactForm.message.value
   };
 
-  emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
-    .then((response) => {
-      console.log('SUCCESS:', response);
-      alert('✅ Your message has been sent!');
+  // ✅ New v4 syntax — no 4th argument for public key
+  emailjs
+    .send('service_jktflig', 'template_eaqlup3', formData)
+    .then(() => {
+      alert('✅ Your message has been sent successfully!');
       contactForm.reset();
     })
     .catch((error) => {
-      console.error('FAILED:', error);
-      alert('❌ Something went wrong. Check console for details.');
+      console.error('❌ Email sending failed:', error);
+      alert('Something went wrong. Please try again later.');
     });
 });
 
@@ -129,8 +130,6 @@ if (canvas) {
     } else {
       canvas.style.display = 'block';
       canvas.height = canvas.parentElement.offsetHeight;
-
-      // Reset img2 position for larger screens
       images[1].x = canvas.width - 200;
     }
   }
@@ -152,14 +151,10 @@ if (canvas) {
   }
 
   img1.onload = img2.onload = () => drawImages();
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-  });
+  window.addEventListener('resize', resizeCanvas);
 
-  // Initial setup
   resizeCanvas();
 }
-
 
 /* -------------------------------
    Ambient RGB Glow
@@ -184,14 +179,12 @@ function drawRGBGlow() {
   const leftGradient = rgbCtx.createLinearGradient(0, 0, width * 0.3, 0);
   leftGradient.addColorStop(0, `rgba(${Math.floor(255 * Math.abs(Math.sin(time)))},0,255,0.15)`);
   leftGradient.addColorStop(1, 'rgba(0,0,0,0)');
-
   rgbCtx.fillStyle = leftGradient;
   rgbCtx.fillRect(0, 0, width * 0.3, height);
 
   const rightGradient = rgbCtx.createLinearGradient(width, 0, width * 0.7, 0);
   rightGradient.addColorStop(0, `rgba(255,${Math.floor(255 * Math.abs(Math.sin(time + 1)))},0,0.15)`);
   rightGradient.addColorStop(1, 'rgba(0,0,0,0)');
-
   rgbCtx.fillStyle = rightGradient;
   rgbCtx.fillRect(width * 0.7, 0, width * 0.3, height);
 

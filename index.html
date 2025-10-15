@@ -148,16 +148,19 @@
     <p>© 2025 Jaasim. All rights reserved.</p>
   </footer>
 
-  <!-- EmailJS SDK -->
-  <script type="module" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    (function(){
-      emailjs.init("BqqUI4uP5FxC3aQYq"); // Your Public Key
-    })();
-  </script>
+  <!-- Load EmailJS SDK (v4) -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  (function() {
+    emailjs.init({
+      publicKey: "BqqUI4uP5FxC3aQYq" // Your actual public key
+    });
+  })();
+</script>
+
 
   <!-- Main JS -->
   <script src="script.js"></script>
-  <script src="coding.js"></script>
 </body>
 </html>
