@@ -42,29 +42,29 @@ closeVideo.addEventListener('click', () => {
 });
 
 /* -------------------------------
-   Contact Form Submission via EmailJS
----------------------------------*/
-const contactForm = document.getElementById('contactForm');
+ const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
- const formData = {
-    name: contactForm.name.value,       // matches {{name}}
-    email: contactForm.email.value,     // matches {{email}}
-    message: contactForm.message.value  // matches {{message}}
+  const formData = {
+    name: contactForm.name.value,
+    email: contactForm.email.value,
+    message: contactForm.message.value
   };
 
   emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
     .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-      alert('Thank you! Your message has been sent.');
+      console.log('SUCCESS:', response);
+      alert('✅ Thank you! Your message has been sent.');
       contactForm.reset();
-    }, (error) => {
-      console.error('FAILED...', error);
-      alert('Oops! Something went wrong. Please check console.');
+    })
+    .catch((error) => {
+      console.error('FAILED:', error);
+      alert('❌ Something went wrong. Check console.');
     });
 });
+
 
 /* -------------------------------
    Navigation Active Link on Scroll
