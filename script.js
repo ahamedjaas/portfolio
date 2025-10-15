@@ -43,7 +43,7 @@ closeVideo.addEventListener('click', () => {
 
  const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', (e)=> {
   e.preventDefault();
 
   const formData = {
@@ -54,14 +54,14 @@ contactForm.addEventListener('submit', function(e) {
 
   // Make sure emailjs is initialized first
   emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
-    .then(function(response) {
+    .then((response) => {
       console.log('SUCCESS:', response);
       alert('✅ Your message has been sent!');
       contactForm.reset();
     })
-    .catch(function(error) {
+    .catch((error)=> {
       console.error('FAILED:', error);
-      alert('❌ Message not sent. Check console for details.');
+      alert('❌ Something went wrong. Check console for details.');
     });
 });
 
