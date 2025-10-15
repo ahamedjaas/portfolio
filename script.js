@@ -41,11 +41,9 @@ closeVideo.addEventListener('click', () => {
   videoElement.src = '';
 });
 
-import emailjs from 'https://cdn.emailjs.com/dist/email.min.js';
+ const contactForm = document.getElementById('contactForm');
 
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', (e)=> {
   e.preventDefault();
 
   const formData = {
@@ -54,15 +52,16 @@ contactForm.addEventListener('submit', (e) => {
     message: contactForm.message.value
   };
 
-  emailjs.send('service_jktflig', 'template_eaqlup3', formData)
-    .then(response => {
-      console.log('✅ Email sent successfully:', response);
+  // Make sure emailjs is initialized first
+  emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
+    .then((response) => {
+      console.log('SUCCESS:', response);
       alert('✅ Your message has been sent!');
       contactForm.reset();
     })
-    .catch(error => {
-      console.error('❌ EmailJS failed:', error);
-      alert('❌ Message not sent. Check console for details.');
+    .catch((error)=> {
+      console.error('FAILED:', error);
+      alert('❌ Something went wrong. Check console for details.');
     });
 });
 

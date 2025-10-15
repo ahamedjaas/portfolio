@@ -149,12 +149,12 @@
   </footer>
 
   <!-- EmailJS SDK -->
-  <script type="module">
-  import emailjs from 'https://cdn.emailjs.com/dist/email.min.js';
+  <script type="module" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-  emailjs.init('BqqUI4uP5FxC3aQYq'); // your public key
-</script>
-
+    (function(){
+      emailjs.init("BqqUI4uP5FxC3aQYq"); // Your Public Key
+    })();
+  </script>
 
   <!-- Main JS -->
   <script src="script.js"></script>
