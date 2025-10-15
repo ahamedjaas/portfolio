@@ -43,7 +43,7 @@ closeVideo.addEventListener('click', () => {
 
  const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e) => {
+contactForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
   const formData = {
@@ -52,17 +52,19 @@ contactForm.addEventListener('submit', (e) => {
     message: contactForm.message.value
   };
 
+  // Make sure emailjs is initialized first
   emailjs.send('service_jktflig', 'template_eaqlup3', formData, 'BqqUI4uP5FxC3aQYq')
-    .then((response) => {
+    .then(function(response) {
       console.log('SUCCESS:', response);
-      alert('✅ Thank you! Your message has been sent.');
+      alert('✅ Your message has been sent!');
       contactForm.reset();
     })
-    .catch((error) => {
+    .catch(function(error) {
       console.error('FAILED:', error);
-      alert('❌ Something went wrong. Check console.');
+      alert('❌ Message not sent. Check console for details.');
     });
 });
+
 
 
 /* -------------------------------
